@@ -1,11 +1,12 @@
 package com.employeepayroll.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employeepayroll.dto.EmployeePayrollDTO;
+import com.employeepayroll.dto.ResponseDTO;
+import com.employeepayroll.exception.PayrollException;
+import com.employeepayroll.exception.PayrollException.exceptionType;
 import com.employeepayroll.model.Employee;
 import com.employeepayroll.repository.IEmployeePayrollRepository;
 
@@ -16,18 +17,18 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	private IEmployeePayrollRepository empRepo;
 	
 	@Override
-	public List<Employee> getEmployees() {
-		return empRepo.findAll();
+	public ResponseDTO getEmployees() {
+		return new ResponseDTO("Here are all the employees in the Database", empRepo.findAll());
 	}
 
-	public Employee addEmployees(EmployeePayrollDTO employee) {
+	public ResponseDTO addEmployees(EmployeePayrollDTO employee) {
 		Employee emp = new Employee(employee);
-		return empRepo.save(emp);
+		return new ResponseDTO("Employee Added To Database Successfully", empRepo.save(emp));
 	}
 
 	@Override
-	public Employee findById(int id) {
-		return empRepo.findById(id).get();
+	public ResponseDTO findById(int id) {
+		return new ResponseDTO("The Employee Details for the provided Id are", empRepo.findById(id).get());
 	}
 
 	@Override
@@ -36,8 +37,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	}
 
 	@Override
-	public Employee updateName(int id, EmployeePayrollDTO emp) {
-		return empRepo.save(new Employee(id, emp));
+	public ResponseDTO updateName(int id, EmployeePayrollDTO emp) {
+		return new ResponseDTO("Here are the Updated Details of the Employee", empRepo.save(new Employee(id, emp)));
+	}
+
+	@Override
+	public ResponseDTO findEmployee(int id) {
+		return new ResponseDTO("Employee By the Given ID is:", empRepo.findById(id).orElseThrow(()-> new PayrollException(exceptionType.EMPLOYEE_NOT_FOUND, "No Employee Found with such ID")));
 	}
 
 }

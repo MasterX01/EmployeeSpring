@@ -1,19 +1,19 @@
 package com.employeepayroll.services;
 
-import java.util.List;
-
 import com.employeepayroll.dto.EmployeePayrollDTO;
-import com.employeepayroll.model.Employee;
+import com.employeepayroll.dto.ResponseDTO;
 
 public interface IEmployeePayrollService {
 	
-	List<Employee> getEmployees();
+	ResponseDTO getEmployees();
 
-	Employee addEmployees(EmployeePayrollDTO employee);
+	ResponseDTO addEmployees(EmployeePayrollDTO employee);
 
-	Employee findById(int id);
+	ResponseDTO findById(int id);
 
 	void deleteEmployee(int id);
 
-	Employee updateName(int id, EmployeePayrollDTO emp);
+	ResponseDTO updateName(int id, EmployeePayrollDTO emp);
+
+	ResponseDTO findEmployee(int id);
 }

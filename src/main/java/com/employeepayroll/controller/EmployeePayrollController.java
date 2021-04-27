@@ -1,6 +1,6 @@
 package com.employeepayroll.controller;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employeepayroll.dto.EmployeePayrollDTO;
-import com.employeepayroll.model.Employee;
+import com.employeepayroll.dto.ResponseDTO;
 import com.employeepayroll.services.IEmployeePayrollService;
 
 @RestController
@@ -32,8 +31,8 @@ public class EmployeePayrollController {
 	 * @return Employee Data
 	 */
 	@PostMapping("/addemployee")
-	public ResponseEntity<Employee> addEmployees(@RequestBody EmployeePayrollDTO employee) {
-		Employee emp =  empPayrollService.addEmployees(employee);
+	public ResponseEntity<ResponseDTO> addEmployees(@Valid @RequestBody EmployeePayrollDTO employee) {
+		ResponseDTO emp =  empPayrollService.addEmployees(employee);
 		return new ResponseEntity<>(emp, HttpStatus.CREATED);
 	}
 	
@@ -41,9 +40,9 @@ public class EmployeePayrollController {
 	 * API to list all the employees in DB
 	 * @return List of employee in Response Entity
 	 */
-	@GetMapping("/")
-	public ResponseEntity<List<Employee>> getEmployees() {
-		List<Employee> emp =  empPayrollService.getEmployees();
+	@GetMapping({"/", "/all"})
+	public ResponseEntity<ResponseDTO> getEmployees() {
+		ResponseDTO emp =  empPayrollService.getEmployees();
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
 	
@@ -53,8 +52,8 @@ public class EmployeePayrollController {
 	 * @return Employee Data 
 	 */
 	@GetMapping("findemployee/{id}")
-	public Employee findByEmplyee(@PathVariable int id) {
-		return empPayrollService.findById(id);
+	public ResponseEntity<ResponseDTO> findByEmployee(@PathVariable int id) {
+		return new ResponseEntity<ResponseDTO>(empPayrollService.findById(id), HttpStatus.FOUND);
 	}
 	
 	 /**
@@ -72,8 +71,19 @@ public class EmployeePayrollController {
 	 * @return Employee Data with updated fields
 	 */
 	@PutMapping("/update/{id}")
-	public Employee updateName(@PathVariable int id, @RequestBody EmployeePayrollDTO emp) {
-		return empPayrollService.updateName(id, emp);
+	public ResponseEntity<ResponseDTO> updateName(@PathVariable int id, @Valid @RequestBody EmployeePayrollDTO emp) {
+		return new ResponseEntity<ResponseDTO>(empPayrollService.updateName(id, emp), HttpStatus.OK);
+	}
+	
+
+	/**
+	 * API to find employee by ID with exception
+	 * @param id
+	 * @return Employee Data 
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<ResponseDTO> findEmployeeById(@PathVariable int id) {
+		return new ResponseEntity<ResponseDTO>(empPayrollService.findEmployee(id), HttpStatus.FOUND);
 	}
 	
 }

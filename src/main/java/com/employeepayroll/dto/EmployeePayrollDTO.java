@@ -1,45 +1,33 @@
 package com.employeepayroll.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import lombok.Data;
 
 @Data
 public class EmployeePayrollDTO {
+	
+	@NotEmpty
+	@Pattern(regexp = "[A-Z]{1}+[a-z]{2,}", message = "Employee Name Invalid (Starts with Capital Letter, Should Not Contain Numbers, Length more than 3)")
 	private String name;
+	
+	@NotEmpty(message = "Address Cannot be Empty")
 	private String address;
+	
+	@NotEmpty(message = "Email Cannot be empty")
+	@Email
 	private String email;
+	
+	@NotNull(message = "Phone Number Cannot be Empty")
 	private long pno;
+	
+	@NotNull
+	@Min(value = 200000, message = "Salary Should be more than 2 LPA")
 	private double salary;
 	
-	public String getName() {
-		return name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public long getPno() {
-		return pno;
-	}
-	public double getSalary() {
-		return salary;
-	}
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setPno(long pno) {
-		this.pno = pno;
-	}
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-
 }

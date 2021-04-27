@@ -6,7 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import com.employeepayroll.dto.EmployeePayrollDTO;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Employee {
 	
 	@Id
@@ -38,11 +41,5 @@ public class Employee {
 		this.salary = employee.getSalary();
 	}
 	
-	public int getId() { return id; }
-	public String getName() { return name; }
-	public String getAddress() { return address; }
-	public String getEmail() { return email; }
-	public long getPno() { return pno; }
-	public double getSalary() { return salary; }
 	
 }
