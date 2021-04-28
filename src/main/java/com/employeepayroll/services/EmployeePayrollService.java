@@ -33,7 +33,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Override
 	public void deleteEmployee(int id) {
-		empRepo.deleteById(id);;
+		empRepo.deleteById(id);
 	}
 
 	@Override
