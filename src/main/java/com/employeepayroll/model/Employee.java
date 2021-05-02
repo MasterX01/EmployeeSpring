@@ -17,14 +17,24 @@ import com.employeepayroll.dto.EmployeePayrollDTO;
 
 import lombok.Data;
 
+
+/**
+ * Employee model the variables will become columns in the DB tables
+ * @author Aakash
+ *
+ */
 @Entity
 @Data
 @Table(name = "employee_details")
 public class Employee {
 	
+	/**
+	 * Private key
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	private String name;
 	private String address;
 	private String email;
@@ -32,6 +42,10 @@ public class Employee {
 	private double salary;
 	private LocalDate start;
 	
+	/**
+	 * Department will become another table which will take employee id and department
+	 * and put it in a table
+	 */
 	@ElementCollection
 	@CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name="id"))
 	@Column(name = "department")
@@ -39,6 +53,11 @@ public class Employee {
 	
 	public Employee() {}
 	
+	/**
+	 * Constructor to update employee data
+	 * @param id
+	 * @param employee DTO
+	 */
 	public Employee(int id, EmployeePayrollDTO emp) {
 		this.id = id;
 		this.name = emp.getName();
@@ -51,6 +70,10 @@ public class Employee {
 
 	}
 
+	/**
+	 * Constructor for adding new employee
+	 * @param employee DTO
+	 */
 	public Employee(EmployeePayrollDTO employee) {
 		this.name = employee.getName();
 		this.address = employee.getAddress();

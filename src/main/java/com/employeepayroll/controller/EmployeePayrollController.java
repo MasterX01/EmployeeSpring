@@ -18,8 +18,12 @@ import com.employeepayroll.dto.EmployeePayrollDTO;
 import com.employeepayroll.dto.ResponseDTO;
 import com.employeepayroll.services.IEmployeePayrollService;
 
+/**
+ * Controller for making contact with the Server
+ * @author Akash Saxena
+ */
 @RestController
-@RequestMapping({"/employeepayroll", ""})
+@RequestMapping({"/employeepayroll","/swagger-ui.html"})
 public class EmployeePayrollController {
 
 	@Autowired
@@ -53,7 +57,7 @@ public class EmployeePayrollController {
 	 */
 	@GetMapping("findemployee/{id}")
 	public ResponseEntity<ResponseDTO> findByEmployee(@PathVariable int id) {
-		return new ResponseEntity<ResponseDTO>(empPayrollService.findById(id), HttpStatus.FOUND);
+		return new ResponseEntity<ResponseDTO>(empPayrollService.findEmployee(id), HttpStatus.FOUND);
 	}
 	
 	 /**

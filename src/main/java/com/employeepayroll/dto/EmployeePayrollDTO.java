@@ -11,6 +11,7 @@ import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
+
 @Data
 public class EmployeePayrollDTO {
 	
@@ -35,9 +36,7 @@ public class EmployeePayrollDTO {
 	@NotNull
 	private List<String> department;
 	
-//	@JsonFormat(pattern = "yyyy-mm-dd")
 	@NotNull(message = "Date cannot be Empty")
-//	@PastOrPresent(message = "Date cannot be of future")
 	private String start;
 	
 }
