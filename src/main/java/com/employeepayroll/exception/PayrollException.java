@@ -2,9 +2,6 @@ package com.employeepayroll.exception;
 
 public class PayrollException extends RuntimeException{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public final exceptionType type;
 	

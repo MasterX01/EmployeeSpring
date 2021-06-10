@@ -36,11 +36,14 @@ public class Employee {
 	private int id;
 	
 	private String name;
-	private String address;
-	private String email;
-	private long pno;
+	private String profileImage;
+//	private String address;
+//	private String email;
+//	private long pno;
+	private String gender;
 	private double salary;
 	private LocalDate start;
+	private String notes;
 	
 	/**
 	 * Department will become another table which will take employee id and department
@@ -61,9 +64,12 @@ public class Employee {
 	public Employee(int id, EmployeePayrollDTO emp) {
 		this.id = id;
 		this.name = emp.getName();
-		this.address = emp.getAddress();
-		this.email = emp.getEmail();
-		this.pno =	 emp.getPno();
+//		this.address = emp.getAddress();
+//		this.email = emp.getEmail();
+//		this.pno =	 emp.getPno();
+		this.notes = emp.getNotes();
+		this.profileImage = emp.getProfileImage();
+		this.gender = emp.getGender();
 		this.salary = emp.getSalary();
 		this.department = emp.getDepartment();
 		this.start = LocalDate.parse(emp.getStart());
@@ -76,9 +82,12 @@ public class Employee {
 	 */
 	public Employee(EmployeePayrollDTO employee) {
 		this.name = employee.getName();
-		this.address = employee.getAddress();
-		this.email = employee.getEmail();
-		this.pno =	 employee.getPno();
+//		this.address = employee.getAddress();
+//		this.email = employee.getEmail();
+//		this.pno =	 employee.getPno();
+		this.notes = employee.getNotes();
+		this.profileImage = employee.getProfileImage();
+		this.gender = employee.getGender();
 		this.salary = employee.getSalary();
 		this.department = employee.getDepartment();
 		this.start = LocalDate.parse(employee.getStart());

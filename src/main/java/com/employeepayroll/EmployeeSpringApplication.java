@@ -13,7 +13,7 @@ public class EmployeeSpringApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeSpringApplication.class, args);
-		log.warn("Application Started");
+//		log.warn("Application Started");
 	}
 
 }
